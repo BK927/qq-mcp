@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qq-mcp"
+version = "0.1.0"
+description = "Scoped QQ MCP access through the official bot API and NapCat OneBot v11"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "BK927"}]
+dependencies = [
+  "mcp>=2.0,<3",
+  "httpx>=0.28.1,<1",
+  "cryptography>=46,<49",
+  "starlette>=0.49,<2",
+  "uvicorn>=0.35,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "pytest-asyncio>=1,<2", "ruff>=0.12,<1"]
+
+[project.scripts]
+qq-mcp = "qq_mcp.server:main"
+
+[project.urls]
+Repository = "https://github.com/BK927/qq-mcp"
+Issues = "https://github.com/BK927/qq-mcp/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["qq_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]
